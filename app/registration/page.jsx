@@ -1,6 +1,5 @@
 "use client";
 import InputComponent from "@/components/InputComponent";
-import MainButton from "@/components/MainButton";
 import { auth, db } from "@/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
@@ -53,27 +52,42 @@ const RegistrationPage = () => {
     }
   };
   return (
-    <div className="flex flex-col gap-8 h-screen justify-center items-center">
-      <p>Registration</p>
+    <div className="flex flex-col gap-[20px] h-screen justify-center items-center">
+      <p className="text-white tracking-[4px] my-[30px] text-[24px] font-bold">
+        Registration
+      </p>
       <InputComponent
         type={"email"}
         value={email}
         setValue={setEmail}
         err={err}
+        id={'email'}
       />
       <InputComponent
         type={"password"}
         value={password1}
         setValue={setPassword1}
         err={err}
+        id={'password1'}
       />
       <InputComponent
         type={"password"}
         value={password2}
         setValue={setPassword2}
+        id={'password2'}
       />
-      <MainButton text={"Register"} action={handleClick} />
-      <Link href="/authorization">Authorization</Link>
+      <button
+        className="tracking-[2px] text-white text-[20px] hover:scale-110 w-[200px] py-4 bg-gradient-to-r rounded-full from-rose-700 to-rose-900 hover:from-rose-800 hover:to-rose-950 duration-200 my-[30px]"
+        onClick={handleClick}
+      >
+        Register
+      </button>
+      <Link
+        href="/authorization"
+        className="text-white tracking-wider hover:scale-110 duration-200"
+      >
+        Authorization
+      </Link>
     </div>
   );
 };

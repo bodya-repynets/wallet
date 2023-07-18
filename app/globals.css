@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@media (max-width: 767px) {
+  .rdrDateRangePickerWrapper {
+    margin-left: -226px;
+  }
+  .rdrDefinedRangesWrapper {
+    visibility: hidden;
+  }
+}
+
+html {
+ background-color: black;
+}
+body{
+  background: linear-gradient(to right, #355c7d, #6c5b7b, #c06c84);
+}

@@ -9,9 +9,13 @@ const categoriesSlice = createSlice({
   initialState,
   reducers: {
     calculateSums: (state, action) => {
+      const fromTime = new Date().getTime() - 518400000;
+      const lastWeekArray = action.payload.filter(
+        (item) => item.time * 1000 > fromTime
+      );
       const categoryList = [];
       const categorySums = [];
-      action.payload.forEach((product) => {
+      lastWeekArray.forEach((product) => {
         const { category, price } = product;
         if (categoryList.includes(category)) {
           const index = categoryList.findIndex((elem) => elem === category);
