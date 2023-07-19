@@ -76,7 +76,6 @@ const AllExpenses = () => {
                 <AiOutlineCalendar />
               </button>
             </div>
-            {console.log(expenses?.filtered)}
             {expenses?.filtered && (
               <div className="flex gap-[20px] justify-center items-center">
                 <p className="text-white font-semibold">

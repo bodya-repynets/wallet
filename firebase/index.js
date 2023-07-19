@@ -4,12 +4,12 @@ import { GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBAM_YQ65FmdzUcHOKL3g6_HRkNPoEtKOc",
-  authDomain: "wallet-49d2d.firebaseapp.com",
-  projectId: "wallet-49d2d",
-  storageBucket: "wallet-49d2d.appspot.com",
-  messagingSenderId: "874327159368",
-  appId: "1:874327159368:web:c7142f1dcec5d3bf3a1e7d",
+  apiKey: process.env.NEXT_PUBLIC_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
