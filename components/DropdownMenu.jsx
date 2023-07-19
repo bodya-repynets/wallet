@@ -20,7 +20,7 @@ const DropdownMenu = ({ handleLogout }) => {
             <Link
               className="tracking-[5px] font-bold uppercase text-white hover:scale-110 duration-200 w-[200px] h-[40px] text-center py-[8px]"
               onClick={() => setShow(false)}
-              href={"/"}
+              href={"/home"}
             >
               Home
             </Link>
