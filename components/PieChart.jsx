@@ -1,7 +1,6 @@
 "use client";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
-import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const PieChart = () => {

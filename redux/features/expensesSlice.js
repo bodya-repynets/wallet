@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import moment from "moment";
 
 const initialState = {
   expenses: {
@@ -7,6 +8,8 @@ const initialState = {
     filtered: null,
     current: null,
     totals: { quantity: null, sum: null },
+    from: null,
+    to: null,
   },
 };
 
@@ -36,7 +39,16 @@ const expensesSlice = createSlice({
       const filtered = arr.filter(
         (item) => item.time * 1000 < to && item.time * 1000 > from
       );
+
+      if (filtered <= 15) {
+        state.expenses.current = filtered.slice(0, filtered.length);
+      } else {
+        state.expenses.current = filtered.slice(0, 15);
+      }
+
       state.expenses.filtered = filtered;
+      state.expenses.from = moment(new Date(from)).format("DD.MM.YYYY");
+      state.expenses.to = moment(new Date(to - 86400000)).format("DD.MM.YYYY");
       state.expenses.totals.quantity = filtered.length;
       state.expenses.totals.sum = filtered.reduce((sum, curr) => {
         return sum + Number(curr.price);
@@ -44,6 +56,8 @@ const expensesSlice = createSlice({
     },
     setFilterToNull: (state, action) => {
       state.expenses.filtered = null;
+      state.expenses.from = null;
+      state.expenses.to = null;
     },
     showMore: (state, action) => {
       state.expenses.current = action.payload.expenses.slice(

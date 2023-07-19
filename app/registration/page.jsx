@@ -8,7 +8,6 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 
 const RegistrationPage = () => {
-  const { user } = useSelector((store) => store.user);
   const [email, setEmail] = useState("");
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
@@ -28,11 +27,7 @@ const RegistrationPage = () => {
       password1 === password2
     ) {
       try {
-        const resp = await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password1
-        );
+        await createUserWithEmailAndPassword(auth, email, password1);
       } catch (error) {
         console.log(error);
       }
@@ -61,20 +56,20 @@ const RegistrationPage = () => {
         value={email}
         setValue={setEmail}
         err={err}
-        id={'email'}
+        id={"email"}
       />
       <InputComponent
         type={"password"}
         value={password1}
         setValue={setPassword1}
         err={err}
-        id={'password1'}
+        id={"password1"}
       />
       <InputComponent
         type={"password"}
         value={password2}
         setValue={setPassword2}
-        id={'password2'}
+        id={"password2"}
       />
       <button
         className="tracking-[2px] text-white text-[20px] hover:scale-110 w-[200px] py-4 bg-gradient-to-r rounded-full from-rose-700 to-rose-900 hover:from-rose-800 hover:to-rose-950 duration-200 my-[30px]"

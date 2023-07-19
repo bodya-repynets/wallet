@@ -20,9 +20,18 @@ const AllExpenses = () => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const handleMore = () => {
-    dispatch(
-      showMore({ expenses: expenses.all, index: expenses.current.length + 1 })
-    );
+    if (expenses?.filtered) {
+      dispatch(
+        showMore({
+          expenses: expenses.filtered,
+          index: expenses.current.length + 1,
+        })
+      );
+    } else {
+      dispatch(
+        showMore({ expenses: expenses.all, index: expenses.current.length + 1 })
+      );
+    }
   };
   useEffect(() => {
     if (user && !expenses.all) {
@@ -47,7 +56,7 @@ const AllExpenses = () => {
   return (
     <>
       <TimeModal showModal={showModal} setShowModal={setShowModal} />
-      <div className="w-screen flex flex-col items-center">
+      <div className="w-screen min-h-screen flex flex-col items-center">
         {expenses.current && (
           <div className="flex flex-col gap-[20px] py-[100px] items-center w-[100%] sm:w-[80%] lg:w-[60%] max-w-[650px]">
             <p className="text-white tracking-[4px] mt-[30px] text-[24px] font-bold">
@@ -67,16 +76,38 @@ const AllExpenses = () => {
                 <AiOutlineCalendar />
               </button>
             </div>
+            {console.log(expenses?.filtered)}
+            {expenses?.filtered && (
+              <div className="flex gap-[20px] justify-center items-center">
+                <p className="text-white font-semibold">
+                  {expenses.from} - {expenses.to}
+                </p>
+                <button
+                  onClick={() => {
+                    dispatch(setFilterToNull());
+                    dispatch(setExpenses(expenses.all));
+                  }}
+                  className="duration-200 text-white bg-gradient-to-r from-rose-700 to-rose-900 hover:from-rose-800 hover:to-rose-950 px-[10px] py-[5px] rounded-full"
+                >
+                  Reset filter
+                </button>
+              </div>
+            )}
             <div className="flex flex-col gap-[20px] w-full items-center">
-              {expenses.filtered
-                ? expenses.filtered.map((item) => {
-                    return <ExpenseItem key={item.id} item={item} />;
-                  })
-                : expenses.current.map((item) => {
-                    return <ExpenseItem key={item.id} item={item} />;
-                  })}
+              {expenses?.current &&
+                expenses.current.map((item) => {
+                  return <ExpenseItem key={item.id} item={item} />;
+                })}
             </div>
-            {expenses?.filtered?.length > 15 && <button>Show more</button>}
+            {expenses?.filtered?.length > 15 &&
+              expenses.filtered.length !== expenses.current.length && (
+                <button
+                  onClick={handleMore}
+                  className="tracking-[2px] text-white text-[20px] hover:scale-110 w-[200px] py-4 bg-gradient-to-r from-rose-700 to-rose-900 hover:from-rose-800 hover:to-rose-950 rounded-full duration-200 mt-[40px]"
+                >
+                  Show more
+                </button>
+              )}
             {expenses?.all.length > 15 &&
               !expenses?.filtered &&
               expenses.all.length !== expenses.current.length && (

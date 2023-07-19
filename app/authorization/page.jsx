@@ -10,7 +10,6 @@ import { FcGoogle } from "react-icons/fc";
 import { setUser } from "@/redux/features/userSlice";
 
 const AuthorizationPage = () => {
-  const { user } = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
