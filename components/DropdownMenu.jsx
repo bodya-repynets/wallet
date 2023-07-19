@@ -49,7 +49,7 @@ const DropdownMenu = ({ handleLogout }) => {
             </button>
           </div>
           <button
-            className="absolute top-[50px] right-[50px] text-white text-[50px] hover:scale-110 duration-200 "
+            className="absolute top-[50px] right-[50px] text-white text-[40px] hover:scale-110 duration-200"
             onClick={() => setShow(false)}
           >
             <AiOutlineClose />

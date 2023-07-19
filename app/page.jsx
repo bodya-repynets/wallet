@@ -5,7 +5,7 @@ import { auth, provider } from "@/firebase";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import Link from "next/link";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { FcGoogle } from "react-icons/fc";
 import { setUser } from "@/redux/features/userSlice";
 

@@ -17,21 +17,22 @@ const Navbar = () => {
     signOut(auth).then((result) => {
       console.log(result);
     });
+    router.push("/");
   };
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        const { displayName, email, uid } = user;
-        const credentials = { displayName, email, uid };
+        const { displayName, email, uid, photoURL } = user;
+        const credentials = { displayName, email, uid, photoURL };
         dispatch(setUser(credentials));
-        if (pathname !== "/authorization" && pathname !== "/registration") {
+        if (pathname !== "/" && pathname !== "/registration") {
           router.push(pathname);
         } else {
-          router.push("/");
+          router.push("/home");
         }
       } else {
         dispatch(deleteUser());
-        router.push("/authorization");
+        router.push("/");
       }
     });
     return unsubscribe;
@@ -39,7 +40,7 @@ const Navbar = () => {
   return (
     <div className="absolute h-[80px] w-screen flex items-center justify-around font-chela bg-gradient-to-r from-slate-700 to-slate-800">
       <Link
-        href={"/"}
+        href={"/home"}
         className="text-[36px] text-white hover:scale-125 tracking-[2px] duration-300"
       >
         Wallet
@@ -49,7 +50,7 @@ const Navbar = () => {
           <div className="items-center gap-[30px] hidden md:flex text-[20px] text-white">
             <Link
               className="hover:text-white hover:scale-125 tracking-[2px] duration-300"
-              href={"/"}
+              href={"/home"}
             >
               Home
             </Link>

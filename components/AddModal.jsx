@@ -32,7 +32,7 @@ const AddModal = ({ category, isOpen, setIsOpen, setCategory }) => {
       setPrice("");
       setCategory("");
       setIsOpen(false);
-      router.push("/");
+      router.push("/home");
     } else {
       setErr(true);
       setTimeout(() => {
