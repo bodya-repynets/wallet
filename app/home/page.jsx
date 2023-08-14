@@ -37,13 +37,17 @@ const Home = () => {
         dispatch(setExpenses(sortedArr));
       });
       return () => unsubscribe();
+    } else {
+      router.push("/");
     }
   }, [user]);
   return (
     <div className="pt-[120px] pb-[80px] flex flex-col gap-[40px] items-center min-h-screen">
       <div className="w-full sm:w-[80%] max-w-[500px] sm:max-w-[650px] sm:px-[75px] lg:w-[60%] bg-black bg-opacity-30 sm:rounded-2xl py-[20px] flex flex-col items-center gap-[20px]">
         <PieChart />
-        <span className="text-white text-xs">* statistics for last week</span>
+        <span className="text-white text-xs">
+          * statistics about last 30 expenses
+        </span>
       </div>
       {expenses.last && (
         <div className="w-[100%] sm-[80%] lg:w-[60%] flex flex-col gap-[50px] items-center">

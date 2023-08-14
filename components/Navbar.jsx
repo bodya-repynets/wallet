@@ -13,10 +13,8 @@ const Navbar = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const { user } = useSelector((store) => store.user);
-  const handleLogout = () => {
-    signOut(auth).then((result) => {
-      console.log(result);
-    });
+  const handleLogout = async () => {
+    await signOut(auth);
     router.push("/");
   };
   useEffect(() => {

@@ -15,14 +15,16 @@ const AuthorizationPage = () => {
   const [password, setPassword] = useState("");
   const [err, setErr] = useState(false);
 
-  const handleLoginWithGoogle = () => {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const { displayName, email, uid } = result.user;
-        const credentials = { displayName, email, uid };
-        dispatch(setUser(credentials));
-      })
-      .catch((err) => console.log(err));
+  const handleLoginWithGoogle = async () => {
+    let resp;
+    try {
+      resp = await signInWithPopup(auth, provider);
+    } catch (error) {
+      console.log(error);
+    }
+    const { displayName, email, uid } = resp.user;
+    const credentials = { displayName, email, uid };
+    dispatch(setUser(credentials));
   };
   const handleClick = async () => {
     function isValidEmail(email) {
@@ -34,15 +36,20 @@ const AuthorizationPage = () => {
       return passwordRegex.test(password);
     }
     if (isValidEmail(email) && isValidPassword(password)) {
+      let resp;
       try {
-        await signInWithEmailAndPassword(auth, email, password);
+        resp = await signInWithEmailAndPassword(auth, email, password);
+        setEmail("");
+        setPassword("");
       } catch (error) {
+        setErr("Invalid email or password");
+        setTimeout(() => {
+          setErr(false);
+        }, 2000);
         console.log(error);
       }
-      setEmail("");
-      setPassword("");
     } else {
-      setErr(true);
+      setErr("Wrong email or password");
       setTimeout(() => {
         setErr(false);
       }, 2000);

@@ -4,10 +4,11 @@ import { auth, db } from "@/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useSelector } from "react-redux";
 
 const RegistrationPage = () => {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
@@ -26,8 +27,9 @@ const RegistrationPage = () => {
       isValidPassword(password1) &&
       password1 === password2
     ) {
+      let resp;
       try {
-        await createUserWithEmailAndPassword(auth, email, password1);
+        resp = await createUserWithEmailAndPassword(auth, email, password1);
       } catch (error) {
         console.log(error);
       }
@@ -38,9 +40,9 @@ const RegistrationPage = () => {
       setEmail("");
       setPassword1("");
       setPassword2("");
-      navigate("/home");
+      router.push("/home");
     } else {
-      setErr(true);
+      setErr("Invalid data or passwords do not match");
       setTimeout(() => {
         setErr(false);
       }, 2000);
@@ -69,6 +71,7 @@ const RegistrationPage = () => {
         type={"password"}
         value={password2}
         setValue={setPassword2}
+        err={err}
         id={"password2"}
       />
       <button
@@ -78,7 +81,7 @@ const RegistrationPage = () => {
         Register
       </button>
       <Link
-        href="/authorization"
+        href="/"
         className="text-white tracking-wider hover:scale-110 duration-200"
       >
         Authorization
