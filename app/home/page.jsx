@@ -48,7 +48,8 @@ const Home = () => {
           <div className="w-full sm:w-[80%] max-w-[500px] sm:max-w-[650px] sm:px-[75px] lg:w-[60%] bg-black bg-opacity-30 sm:rounded-2xl py-[20px] flex flex-col items-center gap-[20px]">
             <PieChart />
             <span className="text-white text-xs">
-              * statistics about last 30 expenses
+              * statistics about last{" "}
+              {expenses?.all?.length < 30 ? expenses?.all?.length : 30} expenses
             </span>
           </div>
           {expenses.last && (
