@@ -69,7 +69,7 @@ const Home = () => {
           )}
         </>
       ) : (
-        <p className="text-white tracking-[4px] text-[24px] font-bold">
+        <p className="text-white tracking-[4px] text-[20px] md:text-[24px] font-bold text-center">
           You don't have any expenses yet.
         </p>
       )}
