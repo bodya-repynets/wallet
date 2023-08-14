@@ -34,7 +34,7 @@ const AllExpenses = () => {
     }
   };
   useEffect(() => {
-    if (user && !expenses.all) {
+    if (user) {
       const q = query(collection(db, "users", user.uid, "expenses"));
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
         let expensesArr = [];
